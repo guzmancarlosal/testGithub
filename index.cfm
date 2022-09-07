@@ -1,48 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pokemon Table</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://kit.fontawesome.com/ce4d174c15.js" crossorigin="anonymous"></script>
 
 
-<!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<cfoutput>#now()#</cfoutput>
-<cfset myFirstName = "Carlos"/>
-<cfset myLastName = "Guzman"/>
-#myFirstName#<br> #now()#
-<cfoutput>
-    my name is #myFirstName# #myLastName#<Br>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
 
-    <cfloop from="1" to="10" index="i" >
-        #i#
-    </cfloop>
-
-<Br><br><Br>
-<cfscript>
-    writeDump(myFirstName);
-    writeDump(myLastName)
-    for (i = 10; i <= 20; i++) {
-        writeDump( i&'<br>')
-     }
-</cfscript>
-<form>
-    <div class="form-group">
-        <label for="exampleInputEmail1">Name</label>
-        <input type="text" class="form-control" id="nameExample"  placeholder="Enter name" value ="#myFirstname#">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your data with anyone else.</small>
+    <div class="container">
+        <h2>Pokemon Table</h2>            
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Base Experience</th>
+                    <th>Pict</th>
+                    <th>More details</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</cfoutput>
+
+</body>
+</html>
+
+<script>
+    $(document).ready(function () { 
+        $('.table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: 'getData.cfm',
+        
+            aoColumns : [                               
+                            { mDataProp: "name"},
+                            { mDataProp: "base_experience"},
+                            { mDataProp: "image"},
+                            { mDataProp: "id"}
+            ]
+
+                    
+        });
+    });
+</script>
